@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarksville Healthcare Hub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFD700;
+            display: block;
+        }
+        
+        .stat-label {
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 30px 0;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .provider-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .provider-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 30px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .provider-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(102,126,234,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .provider-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-left-color: #FFD700;
+        }
+        
+        .provider-card:hover::before {
+            transform: scale(1.5);
+        }
+        
+        .provider-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .provider-title::before {
+            content: '🏥';
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .provider-info {
+            margin-bottom: 15px;
+        }
+        
+        .label {
+            font-weight: 600;
+            color: #667eea;
+            display: inline-block;
+            min-width: 100px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #FFD700 0%, #FFA500 100%);
+            padding: 2px 8px;
+            border-radius: 12px;
+            color: #2c3e50;
+            font-weight: 600;
+            display: inline-block;
+            margin: 2px;
+            font-size: 0.9rem;
+        }
+        
+        .contact-info {
+            background: rgba(102,126,234,0.1);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+        
+        .contact-info a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            color: #2c3e50;
+        }
+        
+        .hospital-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hospital-card::before {
+            content: '🏥';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+        
+        .hospital-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .community-card {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+        
+        .community-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .community-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .community-title::before {
+            content: '🏛️';
+            margin-right: 10px;
+        }
+        
+        .summary-table {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+        
+        .summary-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .summary-table th,
+        .summary-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .summary-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .summary-table tr:hover {
+            background: rgba(102,126,234,0.1);
+        }
+        
+        .floating-emoji {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .pulse-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #2c3e50;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+        }
+        
+        .pulse-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.6);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .provider-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-emoji" style="top: 10%; left: 5%; animation-delay: 0s;">🏥</div>
+    <div class="floating-emoji" style="top: 20%; right: 10%; animation-delay: 2s;">💊</div>
+    <div class="floating-emoji" style="bottom: 30%; left: 8%; animation-delay: 4s;">👩‍⚕️</div>
+    <div class="floating-emoji" style="bottom: 15%; right: 5%; animation-delay: 1s;">🩺</div>
+
+    <div class="container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>🌟 Clarksville Healthcare Hub</h1>
+                <p class="hero-subtitle">Your Gateway to World-Class Medical Care in Music City's Northern Neighbor</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">346K</span>
+                        <span class="stat-label">Metro Population</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">640+</span>
+                        <span class="stat-label">Primary Care Docs</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">30.4</span>
+                        <span class="stat-label">Median Age</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">#1</span>
+                        <span class="stat-label">Growth Rate in TN</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🏆 Premier Healthcare Champions</h2>
+            <div class="provider-grid">
+                <div class="provider-card">
+                    <div class="provider-title">Premier Medical Group</div>
+                    <div class="provider-info">
+                        <span class="label">Power:</span> Largest physician-owned multi-specialty powerhouse in town! 💪
+                    </div>
+                    <div class="provider-info">
+                        <span class="label">Squad:</span> 
+                        <span class="highlight">50+ Providers</span>
+                        <span class="highlight">5 Specialties</span>
+                        <span class="highlight">Family Focus</span>
+                    </div>
+                    <div class="provider-info">
+                        <span class="label">Magic:</span> From tiny tots to wise grandparents - they've got everyone covered! 👶👴
+                    </div>
+                    <div class="contact-info">
+                        🌐 <a href="#">premiermed.com</a> | 📞 Available on website
+                    </div>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-title">Tennova Medical Group</div>
+                    <div class="provider-info">
+                        <span class="label">Network:</span> Part of Tennessee's healthcare empire with 17 hospitals! 🏰
+                    </div>
+                    <div class="provider-info">
+                        <span class="label">Expertise:</span> 
+                        <span class="highlight">Statewide Network</span>
+                        <span class="highlight">Comprehensive Care</span>
+                        <span class="highlight">Coordinated Services</span>
+                    </div>
+                    <div class="provider-info">
+                        <span class="label">Superpower:</span> Seamless care coordination across the entire state! 🚀
+                    </div>
+                    <div class="contact-info">
+                        🌐 <a href="#">tennovaclarksvilledocs.com</a> | 📞 1-855-TENNOVA
+                    </div>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-title">HealthStar Medical Group</div>
+                    <div class="provider-info">
+                        <span class="label">Philosophy:</span> Trust & consistency are their secret ingredients! ✨
+                    </div>
+                    <div class="provider-info">
+                        <span class="label">Approach:</span> 
+                        <span class="highlight">Family-Focused</span>
+                        <span class="highlight">Trust-Based</span>
+                        <span class="highlight">Long-term Bonds</span>
+                    </div>
+                    <div class="provider-info">
+                        <span class="label">Mission:</span> Building healthcare relationships that last a lifetime! 💕
+                    </div>
+                    <div class="contact-info">
+                        🌐 <a href="#">healthstarmedical.com</a> | 📞 Check website for details
+                    </div>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-title">CovenantCare Practices</div>
+                    <div class="provider-info">
+                        <span class="label">Legacy:</span> Family medicine clinic since 2001 with 4 magical locations! 🏛️
+                    </div>
+                    <div class="provider-info">
+                        <span class="label">Territory:</span> 
+                        <span class="highlight">Clarksville</span>
+                        <span class="highlight">Dover</span>
+                        <span class="highlight">Erin</span>
+                        <span class="highlight">Sango</span>
+                    </div>
+                    <div class="provider-info">
+                        <span class="label">Superpower:</span> Blending traditional + innovative medicine for the perfect care cocktail! 🧪
+                    </div>
+                    <div class="provider-info">
+                        <span class="label">Schedule:</span> Open 7 days per week because health doesn't take weekends off!
+                    </div>
+                    <div class="contact-info">
+                        🌐 <a href="#">covenantcarepractices.com</a> | 📞 (931) 245-1150
+                        <br>📍 1000 Highway 76, Clarksville, TN 37043
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🏥 Hospital Heroes</h2>
+            <div class="hospital-card">
+                <div class="hospital-title">Tennova Healthcare - Clarksville</div>
+                <div style="margin-bottom: 15px;">
+                    <strong>📍 Location:</strong> 651 Dunlop Lane, Clarksville, TN 37040
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>⚡ Services:</strong> 24/7 Emergency • Stroke Care Center • Heartburn Specialists • Bariatric Surgery • Complete Medical Services
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>🌟 Cool Fact:</strong> This medical marvel was formerly Gateway Medical Center and joined the Tennova family in 2016!
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong>🎯 Specialties:</strong> 
+                    <span class="highlight">Emergency Medicine</span>
+                    <span class="highlight">Stroke Care</span>
+                    <span class="highlight">Cardiology</span>
+                    <span class="highlight">Surgery</span>
+                    <span class="highlight">Obstetrics</span>
+                </div>
+                <div class="contact-info" style="background: rgba(255,255,255,0.2);">
+                    📞 (931) 502-1000 | 🌐 tennovaclarksville.com
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🏠 Home Sweet Healthcare</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px; color: #2c3e50;">
+                Because sometimes the best medicine is the comfort of your own home! 🏡💕
+            </p>
+            
+            <div class="provider-grid">
+                <div class="provider-card" style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); border-left-color: #4caf50;">
+                    <div class="provider-title" style="color: #2e7d32;">🏥 Amedisys Home Health Care (0546)</div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #4caf50;">National Leader:</span> Part of America's premier home healthcare network serving 465,000+ patients! 🌟
+                    </div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #4caf50;">Magic Services:</span> 
+                        <span class="highlight" style="background: #4caf50; color: white;">Skilled Nursing</span>
+                        <span class="highlight" style="background: #4caf50; color: white;">Physical Therapy</span>
+                        <span class="highlight" style="background: #4caf50; color: white;">Hospice Care</span>
+                        <span class="highlight" style="background: #4caf50; color: white;">24/7 Support</span>
+                    </div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #4caf50;">Specialty Programs:</span> Heart failure care, fall prevention, diabetes management, wound care wizardry! 🩹
+                    </div>
+                    <div class="contact-info" style="background: rgba(76,175,80,0.1);">
+                        📍 2690 Madison Street, Suite 200, Clarksville, TN 37043
+                        <br>📞 (931) 358-9063 | 🌐 <a href="#" style="color: #4caf50;">amedisys.com</a>
+                        <br>⏰ Mon-Fri 8AM-5PM | 🚨 24/7 Emergency On-Call
+                    </div>
+                </div>
+
+                <div class="provider-card" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-left-color: #9c27b0;">
+                    <div class="provider-title" style="color: #7b1fa2;">💜 Adoration Home Health & Hospice</div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #9c27b0;">Heart & Soul:</span> Compassionate care with an "unsurpassed level of quality" - that's their promise! ✨
+                    </div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #9c27b0;">Coverage Zone:</span> Madison, TN + serving Montgomery County with love and expertise 💖
+                    </div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #9c27b0;">Triple Threat:</span> 
+                        <span class="highlight" style="background: #9c27b0; color: white;">Home Health</span>
+                        <span class="highlight" style="background: #9c27b0; color: white;">Hospice Care</span>
+                        <span class="highlight" style="background: #9c27b0; color: white;">Private Duty Nursing</span>
+                    </div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #9c27b0;">Special Touch:</span> Supporting communities through charities & local events because caring goes beyond medicine! 🤝
+                    </div>
+                    <div class="contact-info" style="background: rgba(156,39,176,0.1);">
+                        📍 1210 Briarville Rd., Bldg. D, Ste. B, Madison, TN 37115
+                        <br>📞 (844) 202-9444 | 🌐 <a href="#" style="color: #9c27b0;">adorationhealth.com</a>
+                        <br>⭐ 3.8/5 rating from 23 reviews | Serving since 2011
+                    </div>
+                </div>
+
+                <div class="provider-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left-color: #2196f3;">
+                    <div class="provider-title" style="color: #1976d2;">🌅 Suncrest Clarksville Home Health</div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #2196f3;">Legacy Name:</span> Previously known as Tennova Home Health - same great care, fresh new identity! 🔄
+                    </div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #2196f3;">Local Focus:</span> 
+                        <span class="highlight" style="background: #2196f3; color: white;">Community-Centered</span>
+                        <span class="highlight" style="background: #2196f3; color: white;">Personalized Care</span>
+                        <span class="highlight" style="background: #2196f3; color: white;">Skilled Services</span>
+                    </div>
+                    <div class="provider-info">
+                        <span class="label" style="color: #2196f3;">Mission:</span> Bringing hospital-quality care to your living room since the Tennova days! 🏠
+                    </div>
+                    <div class="contact-info" style="background: rgba(33,150,243,0.1);">
+                        📞 Contact through Tennova Healthcare network
+                        <br>🌐 <a href="#" style="color: #2196f3;">Part of Clarksville healthcare ecosystem</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border-radius: 20px; padding: 30px; margin-top: 30px; text-align: center;">
+                <h3 style="color: #f57f17; margin-bottom: 20px; font-size: 1.5rem;">🎯 Why Choose Home Healthcare in Clarksville?</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">🏡</div>
+                        <strong>Comfort Zone</strong><br>
+                        Heal in your favorite pajamas!
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">👨‍⚕️</div>
+                        <strong>Professional Care</strong><br>
+                        Licensed pros at your doorstep
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">💰</div>
+                        <strong>Insurance Friendly</strong><br>
+                        Medicare, Medicaid & more!
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">🕐</div>
+                        <strong>24/7 Support</strong><br>
+                        Help when you need it most
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h2 class="section-title">🏛️ Community Care Champions</h2>
+            <div class="community-grid">
+                <div class="community-card">
+                    <div class="community-title">Matthew Walker Comprehensive Health Center</div>
+                    <div><strong>Type:</strong> Federally Qualified Health Center (FQHC) 🏅</div>
+                    <div><strong>Mission:</strong> Accessible care for ALL - no matter your wallet size! 💚</div>
+                    <div><strong>Services:</strong> Primary care, preventive services, community health</div>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
+                        📞 (931) 920-5200
+                    </div>
+                </div>
+
+                <div class="community-card">
+                    <div class="community-title">Compass Family Health Clinic</div>
+                    <div><strong>Vibe:</strong> Small, private, and all about that holistic life! 🌿</div>
+                    <div><strong>Location:</strong> 933 Tracy Lane Suite D</div>
+                    <div><strong>Philosophy:</strong> Treating the whole person, not just symptoms</div>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
+                        📞 (615) 667-6799 | ✉️ compassfamilyhealth@gmail.com
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📊 Quick Reference Guide</h2>
+            <div class="summary-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Type</th>
+                            <th>Specialty</th>
+                            <th>Contact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Premier Medical Group</strong></td>
+                            <td>Multi-Specialty Group</td>
+                            <td>Family Medicine, Pediatrics, OB/GYN</td>
+                            <td>premiermed.com</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tennova Medical Group</strong></td>
+                            <td>Health Network</td>
+                            <td>Comprehensive Primary & Specialty Care</td>
+                            <td>1-855-TENNOVA</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HealthStar Medical</strong></td>
+                            <td>Family Practice</td>
+                            <td>Primary Care, Preventive Services</td>
+                            <td>healthstarmedical.com</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tennova Healthcare - Clarksville</strong></td>
+                            <td>Acute Care Hospital</td>
+                            <td>Emergency, Surgery, Specialty Care</td>
+                            <td>(931) 502-1000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CovenantCare Practices</strong></td>
+                            <td>Multi-Location Family Practice</td>
+                            <td>Family Medicine, Traditional + Innovative Care</td>
+                            <td>(931) 245-1150</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Amedisys Home Health (0546)</strong></td>
+                            <td>Home Health Agency</td>
+                            <td>Skilled Nursing, Therapy, Hospice, 24/7 Care</td>
+                            <td>(931) 358-9063</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adoration Home Health</strong></td>
+                            <td>Home Health & Hospice</td>
+                            <td>Compassionate Home Care, Private Duty</td>
+                            <td>(844) 202-9444</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Suncrest Home Health</strong></td>
+                            <td>Home Health Services</td>
+                            <td>Skilled Home Care (Formerly Tennova)</td>
+                            <td>Via Tennova Network</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🎯 Why Clarksville Rocks for Healthcare</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🚀</div>
+                    <h3>Fastest Growing City</h3>
+                    <p>14,000 new neighbors in just 3 years! More people = more awesome healthcare options.</p>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🎖️</div>
+                    <h3>Military-Ready Care</h3>
+                    <p>Next to Fort Campbell = healthcare that understands military families inside and out!</p>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🎵</div>
+                    <h3>Nashville Proximity</h3>
+                    <p>Just 45 minutes from Music City's world-class medical centers. Best of both worlds!</p>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">👨‍⚕️</div>
+                    <h3>640+ Primary Care Docs</h3>
+                    <p>With an average of 27 years experience - these folks know their stuff!</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 50px 0;">
+            <h2 style="color: white; margin-bottom: 20px;">Ready to Find Your Perfect Healthcare Match? 💫</h2>
+            <a href="#" class="pulse-btn">Start Your Healthcare Journey</a>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive fun
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.provider-card, .community-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                    }
+                });
+            });
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                observer.observe(card);
+            });
+            
+            // Add click effects to cards
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
